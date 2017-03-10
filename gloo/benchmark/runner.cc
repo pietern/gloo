@@ -18,6 +18,7 @@
 #include "gloo/rendezvous/context.h"
 #include "gloo/rendezvous/prefix_store.h"
 #include "gloo/rendezvous/redis_store.h"
+#include "gloo/rendezvous/shm_store.h"
 #include "gloo/transport/device.h"
 
 #ifdef GLOO_USE_MPI
@@ -103,8 +104,13 @@ std::shared_ptr<Context> Runner::newContext() {
   prefix << options_.prefix << "-" << prefixCounter_++;
 
   auto context =
-    std::make_shared<rendezvous::Context>(
-      options_.contextRank, options_.contextSize);
+    std::make_shared<Context>(options_.contextRank, options_.contextSize);
+
+  auto shmStore = std::unique_ptr<rendezvous::Store>(
+      new rendezvous::ShmStore(options_.prefix));
+
+  auto prefixStore = std::unique_ptr<rendezvous::Store>(
+    new rendezvous::PrefixStore(prefix.str(), shmStore));
 
   rendezvous::RedisStore redisStore(options_.redisHost, options_.redisPort);
   rendezvous::PrefixStore prefixStore(prefix.str(), redisStore);
