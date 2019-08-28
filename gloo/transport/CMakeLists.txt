@@ -4,6 +4,7 @@ set(GLOO_TRANSPORT_SRCS
   "${CMAKE_CURRENT_SOURCE_DIR}/context.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/device.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/pair.cc"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tally.cc"
   "${CMAKE_CURRENT_SOURCE_DIR}/unbound_buffer.cc"
   )
 
@@ -13,6 +14,7 @@ set(GLOO_TRANSPORT_HDRS
   "${CMAKE_CURRENT_SOURCE_DIR}/context.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/device.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/pair.h"
+  "${CMAKE_CURRENT_SOURCE_DIR}/tally.h"
   "${CMAKE_CURRENT_SOURCE_DIR}/unbound_buffer.h"
   )
 
